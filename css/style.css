@@ -70,12 +70,11 @@ body {
 }
 
 .container__body__answers--indicator input {
-    display: none;
+    /* display: none; */
 }
 
 .container__body__answers--indicator label {
     cursor: pointer;
-    border: 1px solid red;
     width: 100%;
     color: var(--quizard-dark-green);
 }
