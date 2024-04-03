@@ -74,6 +74,21 @@ function previousQuestions() {
 function checkAnswer(e) {
   if (e.currentTarget.value === questions[count].answer) {
     correctAnswer += 1;
+    e.currentTarget.parentElement.classList.toggle("correct");
+    for (let option of e.currentTarget.parentElement.parentElement.children) {
+      if (option.children[0].value !== questions[count].answer) {
+        option.classList.toggle("wrong");
+      }
+    }
+  } else {
+    e.currentTarget.parentElement.classList.toggle("wrong");
+    for (let option of e.currentTarget.parentElement.parentElement.children) {
+      console.log(option.children[0].value)
+      if (option.children[0].value === questions[count].answer) {
+        option.classList.toggle("correct");
+        break;
+      }
+    }
   }
 }
 

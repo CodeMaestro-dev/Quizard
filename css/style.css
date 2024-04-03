@@ -8,6 +8,7 @@
 :root {
     --quizard-dark-green: #0c3429;
     --quizard-light-green:  #00ffb0;
+    --quizard-grey: #A8B8B4;
 }
 
 body {
@@ -64,7 +65,7 @@ body {
     display: flex;
     gap: 10px;
     border-radius: 10px;
-    background-color: var(--quizard-light-green);
+    background-color: var(--quizard-grey);
     padding: 10px;
     cursor: pointer;
 }
@@ -72,7 +73,7 @@ body {
 .container__body__answers--indicator label {
     cursor: pointer;
     width: 100%;
-    color: var(--quizard-dark-green);
+    color: #000000;
 }
 
 .container__footer {
@@ -121,4 +122,12 @@ body {
     padding: 8px;
     cursor: pointer;
     border-radius: 10px;
+}
+
+.correct {
+    background-color: #00ffb0;
+}
+
+.wrong {
+    background-color: #de6868;
 }
