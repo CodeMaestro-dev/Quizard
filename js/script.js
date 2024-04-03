@@ -1,21 +1,3 @@
-const containerBodyQuestion = document.querySelector(
-  ".container__body__question"
-);
-const answerA = document.getElementById("answers-A");
-const answerB = document.getElementById("answers-B");
-const answerC = document.getElementById("answers-C");
-const answerD = document.getElementById("answers-D");
-
-const containerBodyAnswersIndicator = document.querySelectorAll(
-  ".container__body__answers--indicator"
-);
-const containerBodyAnswersIndicatorLabel = document.querySelectorAll(
-  ".container__body__answers--indicator label"
-);
-const questionNumber = document.querySelector("#question-number");
-const previousButton = document.querySelector("#previous-button");
-const nextButton = document.querySelector("#next-button");
-
 const questions = [
   {
     question: "1. What does HTML stand for?",
@@ -55,226 +37,103 @@ const questions = [
       "Tim Berners-Lee, 1993",
       "Tim Berners-Lee, 1989",
     ],
-    answer: "Hypertext markup language",
+    answer: "Tim Berners-Lee, 1993",
   },
 ];
 
-// Logics
+const containerBodyEl = document.querySelector(".container__body");
+const questionNumberEl = document.querySelector("#question-number");
+let count = 0;
+let questionAnswered = 0;
+let correctAnswer = 0;
 
-// if (answerA) {
-//   answerA.addEventListener("click", () => {
-//     console.log(answerA.checked);
-//   });
-// }
-// if (answerB) {
-//   answerB.addEventListener("click", () => {
-//     console.log(answerB.checked);
-//   });
-// }
-// if (answerC) {
-//   answerC.addEventListener("click", () => {
-//     console.log(answerC.checked);
-//   });
-// }
-// if (answerD) {
-//   answerD.addEventListener("click", () => {
-//     console.log(answerD.checked);
-//   });
-// }
-
-function getUserAnswer() {
-  for (let i = 0; i < containerBodyAnswersIndicator.length; i++) {
-    if (answerA) {
-      answerA.addEventListener("click", () => {
-        console.log(answerA.checked);
-        containerBodyAnswersIndicator[0].style = "background-color: #74f412";
-        if (questions[0].options[0] === questions[0].answer) {
-          console.log("correct answer");
-        }
-      });
-      answerA.addEventListener("blur", () => {
-        containerBodyAnswersIndicator[0].style = "backgroound-color: #00ffb0";
-      });
+// Event handlers
+function nextQuestions() {
+  const options = document.querySelectorAll("input");
+  for (let option of options) {
+    if (option.checked) {
+      questionAnswered += 1;
+      break;
     }
-    if (answerB) {
-      answerB.addEventListener("click", () => {
-        console.log(answerB.checked);
-        containerBodyAnswersIndicator[1].style = "background-color: #74f412";
-        console.log(questions[0].options[1]);
-      });
-      answerB.addEventListener("blur", () => {
-        containerBodyAnswersIndicator[1].style = "backgroound-color: #00ffb0";
-      });
-    }
-    if (answerC) {
-      answerC.addEventListener("click", () => {
-        console.log(answerC.checked);
-        containerBodyAnswersIndicator[2].style = "background-color: #74f412";
-        console.log(questions[0].options[2]);
-      });
-      answerC.addEventListener("blur", () => {
-        containerBodyAnswersIndicator[2].style = "backgroound-color: #00ffb0";
-      });
-    }
-    if (answerD) {
-      answerD.addEventListener("click", () => {
-        console.log(answerD.checked);
-        containerBodyAnswersIndicator[3].style = "background-color: #74f412";
-        console.log(questions[0].options[3]);
-      });
-      answerD.addEventListener("blur", () => {
-        containerBodyAnswersIndicator[3].style = "backgroound-color: #00ffb0";
-      });
-    }
-    break;
   }
-}
-
-getUserAnswer();
-
-// function getCheckedAnswer() {
-//     let userAnswer = "";
-//     if(answerA.checked) {
-//         userAnswer = answerA.value;
-//     } else if(answerB.checked) {
-//         userAnswer = answerB.value;
-//     } else if(answerC.checked) {
-//         userAnswer = answerC.value;
-//     } else if(answerD.checked) {
-//         userAnswer = answerD.value;
-//     }
-//     console.log(userAnswer);
-//     return(userAnswer);
-// }
-
-// getCheckedAnswer();
-
-let number = 0;
-containerBodyQuestion.innerHTML = `<h1>${questions[number].question}</h1>`;
-
-previousButton.addEventListener("click", () => {
-  console.log(number);
-  if (number > 0) {
-    number--;
-    containerBodyQuestion.innerHTML = `<h1>${questions[number].question}</h1>`;
+  if (count < questions.length - 1) {
+    count += 1;
+    renderQuestion();
   } else {
-    number = 5;
+    renderSummary();
   }
-
-  for (let i = 0; i < containerBodyAnswersIndicatorLabel.length; i++) {
-    if (containerBodyQuestion.innerText === "1. What does HTML stand for?") {
-      containerBodyAnswersIndicatorLabel[i].innerHTML = questions[0].options[i];
-    } else if (
-      containerBodyQuestion.innerText === "2. What does CSS stand for?"
-    ) {
-      containerBodyAnswersIndicatorLabel[i].innerHTML = questions[1].options[i];
-    } else if (
-      containerBodyQuestion.innerText === "3. What does JS stand for?"
-    ) {
-      containerBodyAnswersIndicatorLabel[i].innerHTML = questions[2].options[i];
-    } else if (
-      containerBodyQuestion.innerText === "4. Which is a JavaScript Library?"
-    ) {
-      containerBodyAnswersIndicatorLabel[i].innerHTML = questions[3].options[i];
-    } else if (
-      containerBodyQuestion.innerText === "5. Who invented HTML and what year?"
-    ) {
-      containerBodyAnswersIndicatorLabel[i].innerHTML = questions[4].options[i];
-    } else {
-      containerBodyAnswersIndicatorLabel[i].innerHTML = questions[0].options[i];
-    }
-  }
-
-  console.log(containerBodyQuestion.innerText);
-});
-
-nextButton.addEventListener("click", () => {
-  console.log(number);
-  if (number < 5) {
-    number++;
-    containerBodyQuestion.innerHTML = `<h1>${questions[number].question}</h1>`;
-  } else {
-    number = 0;
-  }
-
-  for (let i = 0; i < containerBodyAnswersIndicatorLabel.length; i++) {
-    if (containerBodyQuestion.innerText === "1. What does HTML stand for?") {
-      containerBodyAnswersIndicatorLabel[i].innerHTML = questions[0].options[i];
-    } else if (
-      containerBodyQuestion.innerText === "2. What does CSS stand for?"
-    ) {
-      containerBodyAnswersIndicatorLabel[i].innerHTML = questions[1].options[i];
-    } else if (
-      containerBodyQuestion.innerText === "3. What does JS stand for?"
-    ) {
-      containerBodyAnswersIndicatorLabel[i].innerHTML = questions[2].options[i];
-    } else if (
-      containerBodyQuestion.innerText === "4. Which is a JavaScript Library?"
-    ) {
-      containerBodyAnswersIndicatorLabel[i].innerHTML = questions[3].options[i];
-    } else if (
-      containerBodyQuestion.innerText === "5. Who invented HTML and what year?"
-    ) {
-      containerBodyAnswersIndicatorLabel[i].innerHTML = questions[4].options[i];
-    } else {
-      containerBodyAnswersIndicatorLabel[i].innerHTML = questions[0].options[i];
-    }
-  }
-
-  console.log(containerBodyQuestion.innerText);
-});
-
-
-for (let i = 0; i < containerBodyAnswersIndicatorLabel.length; i++) {
-    if (containerBodyQuestion.innerText === '1. What does HTML stand for?') {
-        containerBodyAnswersIndicatorLabel[i].innerHTML = questions[0].options[i];
-  } else if (containerBodyQuestion.innerText === '2. What does CSS stand for?') {
-      containerBodyAnswersIndicatorLabel[i].innerHTML = questions[1].options[i];
-    } else if (containerBodyQuestion.innerText === '3. What does JS stand for?') {
-      containerBodyAnswersIndicatorLabel[i].innerHTML = questions[2].options[i];
-    } else if (containerBodyQuestion.innerText === '4. Which is a JavaScript Library?') {
-      containerBodyAnswersIndicatorLabel[i].innerHTML = questions[3].options[i];
-    } else if (containerBodyQuestion.innerText === '5. Who invented HTML and what year?') {
-      containerBodyAnswersIndicatorLabel[i].innerHTML = questions[4].options[i];
-    } else {
-      containerBodyAnswersIndicatorLabel[i].innerHTML = questions[0].options[i];
-    }
-  }
-  
-  console.log(containerBodyQuestion.innerText)
-
-switch (containerBodyQuestion.innerText) {
-  case questions[0].question:
-    number = 0;
-    break;
-  case questions[1].question:
-    number = 1;
-    break;
-  case questions[2].question:
-    number = 2;
-    break;
-  case questions[3].question:
-    number = 3;
-    break;
-  case questions[4].question:
-    number = 4;
-    break;
 }
 
-switch (containerBodyQuestion.innerText) {
-  case questions[0].question:
-    questionNumber.innerText = 1;
-    break;
-  case questions[1].question:
-    questionNumber.innerText = 2;
-    break;
-  case questions[2].question:
-    questionNumber.innerText = 3;
-    break;
-  case questions[3].question:
-    questionNumber.innerText = 4;
-    break;
-  case questions[4].question:
-    questionNumber.innerText = 5;
-    break;
+function previousQuestions() {
+  if (count > 0) {
+    count -= 1;
+    renderQuestion();
+  }
 }
+
+function checkAnswer(e) {
+  if (e.currentTarget.value === questions[count].answer) {
+    correctAnswer += 1;
+  }
+}
+
+// Rendering of pages
+function renderQuestion() {
+  containerBodyEl.innerHTML = `
+    <div class="container__body__question">
+            <h2>${questions[count].question}</h2>
+    </div>
+    <div>
+      <div class="container__body__answers">
+        <div class="container__body__answers--indicator">
+          <input type="radio" name="answers" id="answers-A" value="${questions[count].options[0]}" />
+          <label for="answers-A">${questions[count].options[0]}</label>
+        </div>
+        <div class="container__body__answers--indicator">
+          <input type="radio" name="answers" id="answers-B" value="${questions[count].options[1]}" />
+          <label for="answers-B">${questions[count].options[1]}</label>
+        </div>
+        <div class="container__body__answers--indicator">
+          <input type="radio" name="answers" id="answers-C" value="${questions[count].options[2]}" />
+          <label for="answers-C">${questions[count].options[2]}</label>
+        </div>
+        <div class="container__body__answers--indicator">
+          <input type="radio" name="answers" id="answers-D" value="${questions[count].options[3]}" />
+          <label for="answers-D">${questions[count].options[3]}</label>
+        </div>
+      </div>
+    </div>
+`;
+  questionNumberEl.innerHTML = `${count + 1}`;
+  const answers = document.querySelectorAll("input");
+  for (let answer of answers) {
+    answer.addEventListener("input", checkAnswer);
+  }
+}
+function renderSummary() {
+  containerBodyEl.innerHTML = `
+    <div class="summmary__body">
+      <h2>You answered ${questionAnswered} out of ${questions.length} questions</h2>
+      <p>You got ${correctAnswer} out of ${questions.length} correct</p>
+    </div>
+    <div>
+      <button id="retake-test">Retake Test</button>
+    </div>
+`;
+  document.getElementById("next-button").style.display = "none";
+  document.getElementById("previous-button").style.display = "none";
+  document.getElementById("retake-test").addEventListener("click", () => {
+    window.location.reload();
+  });
+}
+
+// Initial Rendering ogf page
+renderQuestion();
+
+// Selecting the buttons
+const nextButton = document.getElementById("next-button");
+const previousButton = document.getElementById("previous-button");
+
+// Event Listeners
+nextButton.addEventListener("click", nextQuestions);
+previousButton.addEventListener("click", previousQuestions);
