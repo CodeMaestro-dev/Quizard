@@ -1,0 +1,113 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Reddit Mono", monospace;
+}
+
+:root {
+    --quizard-dark-green: #0c3429;
+    --quizard-light-green:  #00ffb0;
+}
+
+body {
+  background-color: var(--quizard-dark-green);
+}
+
+.container {
+    margin: 50px auto;
+    width: fit-content;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.container__header {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    border-bottom: 1px solid var(--quizard-dark-green);
+    box-shadow: 1px 1px 1px grey;
+    padding: 10px;
+}
+
+.container__header > img {
+    border-radius: 50%;
+    width: 70px;
+}
+
+.container__header > h1 {
+    color: var(--quizard-dark-green);
+}
+
+.container__body {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.container__body > h2 {
+    color: var(--quizard-dark-green);
+}
+
+.container__body__question {
+    margin-bottom: 20px;
+}
+
+.container__body__answers {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.container__body__answers--indicator {
+    display: flex;
+    gap: 10px;
+    border-radius: 10px;
+    background-color: var(--quizard-light-green);
+    padding: 10px;
+    cursor: pointer;
+}
+
+.container__body__answers--indicator input {
+    display: none;
+}
+
+.container__body__answers--indicator label {
+    cursor: pointer;
+    border: 1px solid red;
+    width: 100%;
+    color: var(--quizard-dark-green);
+}
+
+.container__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(128, 128, 128, 0.512);
+    padding: 20px;
+}
+
+.container__footer > p {
+    color: var(--quizard-dark-green);
+}
+
+.container__footer--buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.container__footer--buttons > button {
+    background-color: var(--quizard-light-green);
+    border: 1px solid var(--quizard-dark-green);
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.container__footer--buttons > button > svg {
+    width: 20px;
+}
+
+.cont
+
