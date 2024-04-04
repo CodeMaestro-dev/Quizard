@@ -58,16 +58,10 @@ function nextQuestions() {
   }
   if (count < questions.length - 1) {
     count += 1;
+    change();
     renderQuestion();
   } else {
     renderSummary();
-  }
-}
-
-function previousQuestions() {
-  if (count > 0) {
-    count -= 1;
-    renderQuestion();
   }
 }
 
@@ -78,15 +72,17 @@ function checkAnswer(e) {
     for (let option of e.currentTarget.parentElement.parentElement.children) {
       if (option.children[0].value !== questions[count].answer) {
         option.disabled = true;
-        option.parentElement.style.pointerEvents = 'none';
+        option.parentElement.style.pointerEvents = "none";
       }
     }
   } else {
     e.currentTarget.parentElement.classList.toggle("wrong");
     for (let option of e.currentTarget.parentElement.parentElement.children) {
-      console.log(option.children[0].value)
+      console.log(option.children[0].value);
       if (option.children[0].value === questions[count].answer) {
         option.classList.toggle("correct");
+        option.disabled = true;
+        option.parentElement.style.pointerEvents = "none";
         break;
       }
     }
@@ -139,19 +135,49 @@ function renderSummary() {
     </div>
 `;
   document.getElementById("next-button").style.display = "none";
-  document.getElementById("previous-button").style.display = "none";
   document.getElementById("retake-test").addEventListener("click", () => {
     window.location.reload();
   });
+  document.querySelector(".container__header--timer").style.display = "none";
 }
+
+// Function for random number
+// function printRandomNumber() {
+//   let count = Math.floor(Math.random() * 5);
+//   return(count)
+// }
 
 // Initial Rendering ogf page
 renderQuestion();
 
 // Selecting the buttons
 const nextButton = document.getElementById("next-button");
-const previousButton = document.getElementById("previous-button");
 
 // Event Listeners
 nextButton.addEventListener("click", nextQuestions);
-previousButton.addEventListener("click", previousQuestions);
+
+// Progress bar
+const progress = document.querySelector(".progress--done");
+
+function change() {
+  progress.style.width = `${(count / (questions.length - 1)) * 100}%`;
+}
+
+// Timer
+
+const timer = document.getElementById("timer");
+function timeCounter() {
+  let sec = 29;
+  var time = setInterval(function () {
+    timer.innerHTML = `${sec} sec`;
+    sec--;
+    if (sec < 0) {
+      clearInterval(time);
+    }
+    if (timer.innerHTML === "0 sec") {
+      renderSummary();
+    }
+  }, 1000);
+}
+
+timeCounter();
