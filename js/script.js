@@ -78,7 +78,6 @@ function checkAnswer(e) {
   } else {
     e.currentTarget.parentElement.classList.toggle("wrong");
     for (let option of e.currentTarget.parentElement.parentElement.children) {
-      console.log(option.children[0].value);
       if (option.children[0].value === questions[count].answer) {
         option.classList.toggle("correct");
         option.disabled = true;
@@ -134,11 +133,12 @@ function renderSummary() {
       <button id="retake-test">Retake Test</button>
     </div>
 `;
+  document.querySelector(".container__header--timer").style.display = "none";
+  document.querySelector(".progress").style.display = "none";
   document.getElementById("next-button").style.display = "none";
   document.getElementById("retake-test").addEventListener("click", () => {
     window.location.reload();
   });
-  document.querySelector(".container__header--timer").style.display = "none";
 }
 
 // Function for random number
