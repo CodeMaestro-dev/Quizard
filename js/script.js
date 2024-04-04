@@ -77,7 +77,8 @@ function checkAnswer(e) {
     e.currentTarget.parentElement.classList.toggle("correct");
     for (let option of e.currentTarget.parentElement.parentElement.children) {
       if (option.children[0].value !== questions[count].answer) {
-        option.classList.toggle("wrong");
+        option.disabled = true;
+        option.parentElement.style.pointerEvents = 'none';
       }
     }
   } else {
@@ -125,6 +126,8 @@ function renderQuestion() {
     answer.addEventListener("input", checkAnswer);
   }
 }
+
+// Function for rendering the summary page
 function renderSummary() {
   containerBodyEl.innerHTML = `
     <div class="summmary__body">
